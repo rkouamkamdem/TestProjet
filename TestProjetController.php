@@ -7,10 +7,12 @@
  */
 
 namespace AppBundle\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class TestProjetController
 {
-
     public function calculatrice($operation,$a,$b)
     {
         switch ($operation){
@@ -61,17 +63,17 @@ class TestProjetController
 
     public function generateRandomToken($stringForToken){
 
-        if( strlen($stringForToken) <= 6 ) return false;
+        if( strlen($stringForToken) <= 6 )
+            return false;
 
         $regex = "#[a-zA-Z0-9]+#";
-        //$stringForToken = "?,;# /'(@&{çABDSFGT45678";
-        //$regex = "#[a-zA-Z0-9]{2,}#i";//!!#-//$stringForToken = "Ui1Tw7Gd6Jc5";
-        //$matches = array();
-        preg_match($regex,$stringForToken,$matches,PREG_OFFSET_CAPTURE);
-        //$nbrCharnonconforme = $matches[1];
 
-        if( preg_match($regex,$stringForToken,$matches,PREG_OFFSET_CAPTURE) === false && $matches[0][0][1] !== 0 ){
+        if( preg_match($regex,$stringForToken,$matches,PREG_OFFSET_CAPTURE) === 0 )
             return false;
+
+        if( preg_match($regex,$stringForToken,$matches,PREG_OFFSET_CAPTURE) !== 0 ) {
+            if( $matches[0][1] !== 0 )
+                return false;
         }
         else{
 

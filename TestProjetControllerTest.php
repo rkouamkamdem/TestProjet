@@ -71,6 +71,8 @@ class TestProjetControllerTest extends TestCase
     public function testGenerateRandomToken()
     {
         $TestProjetController = new TestProjetController();
+        $this->assertFalse(false,$TestProjetController->generateRandomToken('ADER'));
+        $this->assertFalse(false,$TestProjetController->generateRandomToken('ADERé'));
         $this->assertFalse(false,$TestProjetController->generateRandomToken('&#;?ù%*§!,$£'));
         $this->assertFalse(false,$TestProjetController->generateRandomToken('ADEvgtser§!,$£'));
         $this->assertTrue(true,$TestProjetController->generateRandomToken('adefgrrABDSFGT45678'));
